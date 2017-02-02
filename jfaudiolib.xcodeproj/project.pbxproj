@@ -228,7 +228,7 @@
 			buildConfigurationList = AB2E9E441011E61900DD2F1F /* Build configuration list for PBXNativeTarget "jfaudiolib" */;
 			buildPhases = (
 				AB2E9E3E1011E61600DD2F1F /* Headers */,
-				AB0A488B1E43568E00CC2214 /* ShellScript */,
+				AB0A488B1E43568E00CC2214 /* Fetch and build Vorbis and Ogg */,
 				AB2E9E3F1011E61600DD2F1F /* Sources */,
 				AB2E9E401011E61600DD2F1F /* Frameworks */,
 			);
@@ -288,13 +288,14 @@
 /* End PBXProject section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		AB0A488B1E43568E00CC2214 /* ShellScript */ = {
+		AB0A488B1E43568E00CC2214 /* Fetch and build Vorbis and Ogg */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Fetch and build Vorbis and Ogg";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
