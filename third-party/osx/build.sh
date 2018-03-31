@@ -3,6 +3,11 @@
 oggurl=http://downloads.xiph.org/releases/ogg/libogg-1.3.2.tar.gz
 vorbisurl=http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.5.tar.gz
 
+oggfile=${oggurl##*/}
+vorbisfile=${vorbisurl##*/}
+
+cwd=$PWD
+
 export CFLAGS="-arch i386 -arch x86_64 -mmacosx-version-min=10.8"
 
 export MAKE="xcrun make"
@@ -26,47 +31,47 @@ check_tools() {
     fi
 }
 
-if test ! -f libogg.a; then
+if test ! -f out/lib/libogg.a; then
     check_tools
 
+    rm -rf libogg-build
     mkdir libogg-build
 
     echo "+++ Fetching and unpacking $oggurl"
-    curl -s $oggurl | (cd libogg-build; tar zx --strip-components 1) || exit
+    test ! -f $oggfile && curl -L -s $oggurl -o $oggfile
+    (cd libogg-build; tar zx --strip-components 1) < $oggfile || exit
 
     echo "+++ Configuring libogg"
-    (cd libogg-build; ./configure) || exit
+    (cd libogg-build; PKG_CONFIG=false ./configure --prefix=$cwd/out) || exit
 
     echo "+++ Building libogg"
     (cd libogg-build; $MAKE) || exit
 
     echo "+++ Collecting libogg build products"
-    mkdir ogg
-    cp libogg-build/src/.libs/libogg.a .
-    cp libogg-build/include/ogg/*.h ogg
+    (cd libogg-build; $MAKE install)
 
     echo "+++ Cleaning up libogg"
     rm -rf libogg-build
 fi
 
-if test ! -f libvorbisfile.a; then
+if test ! -f out/lib/libvorbisfile.a; then
     check_tools
 
+    rm -rf libvorbis-build
     mkdir libvorbis-build
 
     echo "+++ Fetching and unpacking $vorbisurl"
-    curl -s $vorbisurl | (cd libvorbis-build; tar zx --strip-components 1) || exit
+    test ! -f $vorbisfile && curl -L -s $vorbisurl -o $vorbisfile
+    (cd libvorbis-build; tar zx --strip-components 1) < $vorbisfile || exit
 
     echo "+++ Configuring libvorbis"
-    (cd libvorbis-build; ./configure --with-ogg-libraries=$(pwd)/.. --with-ogg-includes=$(pwd)/..) || exit
+    (cd libvorbis-build; PKG_CONFIG=false ./configure --with-ogg=$cwd/out --prefix=$cwd/out) || exit
 
     echo "+++ Building libvorbis"
     (cd libvorbis-build; $MAKE) || exit
 
     echo "+++ Collecting libvorbis build products"
-    mkdir vorbis
-    cp libvorbis-build/lib/.libs/libvorbis{,file}.a .
-    cp libvorbis-build/include/vorbis/{codec,vorbisfile}.h vorbis
+    (cd libvorbis-build; $MAKE install)
 
     echo "+++ Cleaning up libvorbis"
     rm -rf libvorbis-build

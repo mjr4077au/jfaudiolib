@@ -8,3 +8,5 @@
 /*.xcodeproj/project.xcworkspace
 /*.xcodeproj/xcuserdata
 /Makefile.user
+/third-party/osx/*.tar.gz
+/third-party/osx/out

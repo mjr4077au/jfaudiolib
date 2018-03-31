@@ -56,9 +56,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AB0A488C1E43574900CC2214 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libogg.a; path = "third-party/osx/libogg.a"; sourceTree = "<group>"; };
-		AB0A488D1E43574900CC2214 /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbis.a; path = "third-party/osx/libvorbis.a"; sourceTree = "<group>"; };
-		AB0A488E1E43574900CC2214 /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisfile.a; path = "third-party/osx/libvorbisfile.a"; sourceTree = "<group>"; };
+		AB0A488C1E43574900CC2214 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libogg.a; path = "third-party/osx/out/lib/libogg.a"; sourceTree = "<group>"; };
+		AB0A488D1E43574900CC2214 /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbis.a; path = "third-party/osx/out/lib/libvorbis.a"; sourceTree = "<group>"; };
+		AB0A488E1E43574900CC2214 /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisfile.a; path = "third-party/osx/out/lib/libvorbisfile.a"; sourceTree = "<group>"; };
 		AB217B64172E645C00364868 /* driver_coreaudio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = driver_coreaudio.c; sourceTree = "<group>"; };
 		AB217B66172E646A00364868 /* driver_coreaudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = driver_coreaudio.h; sourceTree = "<group>"; };
 		AB217B6B172E669100364868 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
@@ -87,6 +87,7 @@
 		AB8C5867101B6D7500B42306 /* vorbis.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vorbis.c; sourceTree = "<group>"; };
 		ABBD3EEF101FFB1400F32F37 /* cd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cd.h; sourceTree = "<group>"; };
 		ABBD3F17101FFBD900F32F37 /* cd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cd.c; sourceTree = "<group>"; };
+		ABD9E948206F9FCD00F1B9B3 /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = build.sh; path = "third-party/osx/build.sh"; sourceTree = "<group>"; };
 		ABE4C94B172EA55A00B18CE9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = /System/Library/Frameworks/AudioToolbox.framework; sourceTree = "<absolute>"; };
 		ABFBB51E102EBD4100D48B58 /* _midi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _midi.h; sourceTree = "<group>"; };
 		ABFBB51F102EBD4100D48B58 /* midi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = midi.c; sourceTree = "<group>"; };
@@ -122,6 +123,7 @@
 		AB2E9E301011E60300DD2F1F = {
 			isa = PBXGroup;
 			children = (
+				ABD9E948206F9FCD00F1B9B3 /* build.sh */,
 				AB8C582E101B6B7900B42306 /* Frameworks */,
 				AB2E9E481011E63F00DD2F1F /* include */,
 				AB2E9E471011E63900DD2F1F /* src */,
@@ -354,7 +356,8 @@
 					HAVE_VORBIS,
 					__MACOSX__,
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/third-party/osx/**";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/third-party/osx/out/include/**";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/third-party/osx/out/lib";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 			};
@@ -369,7 +372,8 @@
 					HAVE_VORBIS,
 					__MACOSX__,
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/third-party/osx/**";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/third-party/osx/out/include/**";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/third-party/osx/out/lib";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 			};
 			name = Release;
@@ -380,10 +384,6 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/third-party/osx",
-				);
 				PRODUCT_NAME = jfaudiolib;
 			};
 			name = Debug;
@@ -393,10 +393,6 @@
 			buildSettings = {
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/third-party/osx",
-				);
 				PRODUCT_NAME = jfaudiolib;
 			};
 			name = Release;
